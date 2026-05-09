@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>恐惧峰会：状态重置 | 夺回人生控制权</title>
+  <!-- 预加载核心字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- 引入Font Awesome增强视觉 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-orange: #FF6A00;
+      --primary-red: #FF4400;
+      --dark-bg: #141414;
+      --darker-bg: #1a1a1a;
+      --text-white: #ffffff;
+      --text-gray: #999999;
+      --text-light-gray: #bbbbbb;
+      --shadow-orange: 0 0 25px rgba(255,106,0,0.25);
+      --transition-fast: all 0.2s ease;
+      --transition-slow: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      tap-highlight-color: rgba(0,0,0,0);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg), #181818);
+      color: var(--text-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      padding-top: 70px;
+    }
+
+    .top-countdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #111, #1a1a1a);
+      border-bottom: 2px solid var(--primary-orange);
+      padding: 8px 8px;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .top-countdown .urgency-badge {
+      margin: 0 5px 5px 0;
+      padding: 6px 10px;
+      font-size: clamp(12px, 3vw, 14px);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    
+    .top-countdown .countdown-container {
+      margin: 0;
+      padding: 6px 8px;
+      font-size: clamp(12px, 3vw, 14px);
+      flex-grow: 1;
+      text-align: right;
+    }
+    
+    .top-countdown .countdown-number {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: clamp(20px, 8vw, 60px) 8px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .section-hero {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    
+    .section-dark {
+      background: var(--darker-bg);
+      border-top: 1px solid rgba(42,42,42,0.8);
+      border-bottom: 1px solid rgba(42,42,42,0.8);
+      background: linear-gradient(180deg, var(--darker-bg) 0%, #171717 100%);
+    }
+    
+    .container, .container-left {
+      max-width: 100%;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+    
+    .container { text-align: center; }
+    .container-left { text-align: left; }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-red));
+      margin: clamp(20px, 5vw, 30px) auto;
+      box-shadow: var(--shadow-orange);
+      border-radius: 4px;
+    }
+    
+    .divider-sm {
+      width: 30px;
+      height: 2px;
+      margin: 15px auto;
+    }
+
+    .hero-title {
+      font-size: clamp(24px, 10vw, 48px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: clamp(10px, 3vw, 15px);
+      color: var(--text-white);
+      background: linear-gradient(120deg, #ffffff, #e0e0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: left;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(16px, 4vw, 20px);
+      color: var(--text-light-gray);
+      margin-bottom: clamp(15px, 4vw, 20px);
+      text-align: left;
+      max-width: 100%;
+    }
+    
+    .heading {
+      font-size: clamp(22px, 8vw, 36px);
+      font-weight: 900;
+      margin-bottom: clamp(15px, 3vw, 20px);
+      line-height: 1.2;
+      background: linear-gradient(120deg, #ffffff, #e0e0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subhead {
+      font-size: clamp(15px, 4vw, 18px);
+      color: var(--text-light-gray);
+      margin-bottom: clamp(10px, 2vw, 15px);
+    }
+    
+    .text {
+      font-size: clamp(14px, 3.5vw, 16px);
+      color: var(--text-gray);
+      margin-bottom: clamp(10px, 2vw, 15px);
+      line-height: 1.7;
+    }
+
+    .orange { color: var(--primary-orange); }
+    .red { color: var(--primary-red); }
+    
+    .orange-bold {
+      color: var(--primary-orange);
+      font-weight: 800;
+      font-size: clamp(15px, 4vw, 18px);
+      margin: clamp(15px, 4vw, 20px) 0;
+      text-shadow: 0 0 15px rgba(255,106,0,0.2);
+      display: block;
+    }
+    
+    .guarantee-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,106,0,0.1);
+      border: 1px solid var(--primary-orange);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 12px;
+      color: var(--primary-orange);
+      margin: 8px 0 15px;
+    }
+    
+    .handwriting {
+      font-style: italic;
+      color: #ccc;
+      font-size: clamp(14px, 3.5vw, 16px);
+      margin-top: 15px;
+      font-weight: 400;
+    }
+
+    .orange-box {
+      border: 2px solid var(--primary-orange);
+      padding: clamp(15px, 4vw, 20px);
+      margin: clamp(20px, 5vw, 30px) 0;
+      background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 8px 30px rgba(0,0,0,0.2);
+      font-size: clamp(16px, 4vw, 18px);
+      font-weight: 700;
+      border-radius: 12px;
+      transform: translateY(-2px);
+      transition: var(--transition-slow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .orange-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,106,0,0.1), transparent);
+      transition: all 0.8s ease;
+    }
+    
+    .orange-box:hover::before { left: 100%; }
+    .orange-box:hover, .orange-box:active {
+      transform: translateY(-5px);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 12px 40px rgba(0,0,0,0.3);
+      border-color: #FF7A18;
+    }
+
+    .grid-table {
+      width: 100%;
+      margin: clamp(15px, 4vw, 20px) 0;
+      text-align: left;
+      border: 1px solid rgba(51,51,51,0.8);
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--darker-bg) 0%, #171717 100%);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transform: translateY(-1px);
+    }
+    
+    .grid-table .row {
+      display: flex;
+      flex-direction: column;
+      padding: clamp(10px, 3vw, 15px);
+      border-bottom: 1px solid rgba(51,51,51,0.6);
+      font-size: clamp(14px, 3vw, 16px);
+      align-items: flex-start;
+      transition: var(--transition-fast);
+    }
+    
+    .grid-table .row:last-child { border-bottom: none; }
+    .grid-table .row:hover {
+      background: rgba(255,255,255,0.02);
+      padding-left: clamp(15px, 3vw, 20px);
+    }
+    
+    .grid-table .row .left {
+      width: 100%;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .grid-table .row .left i {
+      color: var(--primary-orange);
+      font-size: 16px;
+    }
+    
+    .grid-table .row .right {
+      width: 100%;
+      color: var(--text-gray);
+      font-size: clamp(13px, 3vw, 14px);
+    }
+
+    .fear-list-section {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .fear-list-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(circle at 70% 50%, rgba(255,106,0,0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    
+    .fear-item {
+      background: rgba(255, 68, 0, 0.05);
+      border-left: 3px solid var(--primary-red);
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 6px;
+      transition: var(--transition-fast);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .fear-item:hover {
+      background: rgba(255, 68, 0, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .fear-item h4 {
+      color: var(--primary-orange);
+      font-size: clamp(15px, 4vw, 18px);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .fear-item p {
+      color: var(--text-light-gray);
+      font-size: clamp(13px, 3.5vw, 14px);
+      line-height: 1.5;
+    }
+    
+    .fear-highlight {
+      font-size: clamp(16px, 5vw, 20px);
+      color: var(--primary-orange);
+      font-weight: 800;
+      margin: 25px 0 15px;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(255,106,0,0.2);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(15px, 4vw, 20px);
+      margin: clamp(15px, 4vw, 25px) 0;
+    }
+    
+    .fear-section {
+      background: linear-gradient(135deg, #111 0%, var(--darker-bg) 50%, #111 100%);
+      background-size: cover;
+      background-position: center;
+      padding: clamp(30px, 10vw, 80px) 8px;
+      position: relative;
+      border-radius: 0;
+      margin: 20px 0;
+    }
+    
+    .fear-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,106,0,0.08) 0%, transparent 50%);
+      z-index: 0;
+    }
+    
+    .fear-title {
+      font-size: clamp(28px, 10vw, 48px);
+      font-weight: 900;
+      background: linear-gradient(120deg, var(--primary-orange), var(--primary-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: clamp(10px, 3vw, 15px);
+      text-shadow: 0 0 25px rgba(255,106,0,0.3);
+    }
+    
+    .fear-value-list {
+      max-width: 100%;
+      margin: 20px auto;
+      text-align: left;
+    }
+    
+    .fear-value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(255,106,0,0.05);
+      border-radius: 8px;
+    }
+    
+    .fear-value-item .icon {
+      background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(255,106,0,0.3);
+    }
+    
+    .fear-value-item .icon i {
+      font-size: 18px;
+      color: white;
+    }
+    
+    .fear-value-item .content { flex: 1; }
+    .fear-value-item h3 {
+      font-size: clamp(16px, 4vw, 18px);
+      color: var(--primary-orange);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+    
+    .fear-value-item p {
+      color: var(--text-light-gray);
+      font-size: clamp(13px, 3.5vw, 14px);
+      line-height: 1.6;
+    }
+    
+    .fear-text {
+      font-size: clamp(16px, 5vw, 22px);
+      font-weight: 700;
+      margin: clamp(15px, 4vw, 20px) 0;
+      color: var(--text-white);
+    }
+    
+    .fear-tag {
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-red));
+      color: #fff;
+      font-size: clamp(14px, 4vw, 16px);
+      padding: 8px 16px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: clamp(10px, 3vw, 15px) 0;
+      box-shadow: 0 8px 20px rgba(255,106,0,0.3);
+      font-weight: 700;
+    }
+    
+    .fear-note {
+      font-size: clamp(13px, 3.5vw, 14px);
+      color: var(--text-gray);
+      margin-top: 15px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: clamp(8px, 2vw, 15px);
+      margin: clamp(20px, 5vw, 30px) 0;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-red));
+      color: #fff;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 700;
+      padding: clamp(12px, 5vw, 16px) clamp(20px, 8vw, 30px);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition-slow);
+      box-shadow: 0 8px 25px rgba(255,106,0,0.35);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      min-height: 44px;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-hero {
+      font-size: clamp(16px, 4.5vw, 18px);
+      padding: clamp(14px, 6vw, 18px) clamp(25px, 10vw, 40px);
+      min-height: 48px;
+      border-radius: 8px;
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,250,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .btn:active::after {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(255,106,0,0.5);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary-orange);
+      color: var(--primary-orange);
+      box-shadow: none;
+      background: linear-gradient(180deg, rgba(255,106,0,0.05) 0%, transparent 100%);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255,106,0,0.1);
+      box-shadow: 0 8px 25px rgba(255,106,0,0.2);
+    }
+
+    .urgency-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF3300, #FF6600);
+      color: white;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: clamp(13px, 4vw, 15px);
+      margin: 15px 0;
+      box-shadow: 0 6px 20px rgba(255, 51, 0, 0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .urgency-text {
+      color: var(--primary-orange);
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 700;
+      margin: 10px 0;
+    }
+    
+    .countdown-container {
+      font-size: clamp(14px, 4vw, 16px);
+      color: white;
+      background: rgba(255, 68, 0, 0.15);
+      padding: 8px 15px;
+      border-radius: 6px;
+      display: inline-block;
+      margin: 8px 0;
+      border: 1px solid var(--primary-red);
+    }
+    
+    .countdown-box {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .countdown-number {
+      background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+      width: 35px;
+      height: 35px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(255,106,0,0.4);
+    }
+    
+    .countdown-label {
+      font-size: 12px;
+      color: var(--text-light-gray);
+    }
+
+    .float-btn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-orange), var(--primary-red));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 8px 25px rgba(255,106,0,0.4);
+      transition: var(--transition-fast);
+      cursor: pointer;
+      touch-action: manipulation;
+      text-align: center;
+      line-height: 1.2;
+    }
+    
+    .float-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(255,106,0,0.5);
+    }
+
+    .exit-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow-y: auto;
+    }
+    
+    .exit-modal.show { display: flex; }
+    
+    .exit-box {
+      max-width: 95%;
+      width: 95%;
+      background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+      border: 2px solid var(--primary-orange);
+      padding: clamp(20px, 6vw, 30px);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: translateY(-10px);
+      animation: modalPop 0.4s ease forwards;
+    }
+    
+    @keyframes modalPop {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(-10px); }
+    }
+    
+    .exit-title {
+      font-size: clamp(20px, 6vw, 26px);
+      font-weight: 900;
+      color: var(--primary-orange);
+      margin-bottom: 10px;
+    }
+    
+    .exit-text {
+      font-size: clamp(16px, 4vw, 18px);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .exit-offer {
+      background: rgba(255,106,0,0.1);
+      border-radius: 8px;
+      padding: 10px;
+      margin: 15px 0;
+      font-size: 14px;
+      color: var(--text-light-gray);
+    }
+    
+    .close-exit {
+      color: #777;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      font-size: 14px;
+    }
+    
+    .close-exit:hover { color: var(--primary-orange); }
+
+    .qrcode-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      overflow-y: auto;
+    }
+
+    .qrcode-modal.show { display: flex; }
+
+    .qrcode-box {
+      max-width: 95%;
+      width: 95%;
+      max-width: 400px;
+      background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+      border: 2px solid var(--primary-orange);
+      padding: clamp(20px, 6vw, 30px);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: translateY(-10px);
+      animation: modalPop 0.4s ease forwards;
+    }
+
+    .qrcode-title {
+      font-size: clamp(22px, 6vw, 28px);
+      font-weight: 900;
+      color: var(--primary-orange);
+      margin-bottom: 10px;
+    }
+
+    .qrcode-desc {
+      font-size: clamp(16px, 4vw, 18px);
+      color: var(--text-light-gray);
+      margin-bottom: 20px;
+    }
+
+    /* 微信号展示样式 */
+    .wechat-id {
+      font-size: clamp(20px, 6vw, 28px);
+      font-weight: 900;
+      color: var(--primary-orange);
+      padding: 16px 20px;
+      border: 2px dashed var(--primary-orange);
+      border-radius: 12px;
+      display: inline-block;
+      margin: 20px 0;
+      background: rgba(255,106,0,0.08);
+      user-select: all;
+      -webkit-user-select: all;
+    }
+
+    .qrcode-note {
+      font-size: clamp(14px, 3.5vw, 16px);
+      color: var(--primary-red);
+      margin: 20px 0;
+      font-weight: 700;
+    }
+
+    .close-qrcode {
+      color: #777;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      font-size: 14px;
+    }
+
+    .close-qrcode:hover { color: var(--primary-orange); }
+
+    @media (min-width: 768px) {
+      .qrcode-box {
+        padding: 40px;
+      }
+    }
+
+    .faq-container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      margin: clamp(8px, 2vw, 10px) 0;
+      cursor: pointer;
+      background: rgba(26,26,26,0.5);
+      border-radius: 8px;
+      padding: clamp(8px, 2vw, 10px);
+      border: 1px solid rgba(51,51,51,0.5);
+      touch-action: manipulation;
+    }
+    
+    .faq-question {
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      transition: color 0.2s ease;
+    }
+    
+    .faq-question:hover { color: var(--primary-orange); }
+    .faq-question::after {
+      content: "+";
+      color: var(--primary-orange);
+      font-size: 20px;
+      transition: var(--transition-fast);
+    }
+    
+    .faq-question.active::after {
+      content: "-";
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--text-gray);
+      font-size: clamp(13px, 3.5vw, 14px);
+      line-height: 1.7;
+      padding: 0 5px;
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      the: ;
+    }
+    
+    .testimonial-header i {
+      color: #FFD700;
+      font-size: 16px;
+    }
+    
+    .testimonial-main-title {
+      font-size: clamp(24px, 8vw, 36px);
+      font-weight: 900;
+      color: var(--text-white);
+      margin-bottom: 8px;
+      background: linear-gradient(120deg, var(--primary-orange), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .testimonial-subtitle {
+      font-size: clamp(15px, 4vw, 18px);
+      color: var(--text-light-gray);
+      margin-bottom: 25px;
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(180deg, #222 0%, #1e1e1e 100%);
+      border-radius: 12px;
+      padding: clamp(15px, 4vw, 20px);
+      text-align: left;
+      height: 100%;
+      border: 1px solid rgba(51,51,51,0.8);
+      transition: var(--transition-slow);
+      transform: translateY(0);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .testimonial-card:hover {
+      border-color: var(--primary-orange);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    
+    .testimonial-quote {
+      font-size: 24px;
+      color: var(--primary-orange);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    
+    .testimonial-text {
+      font-size: clamp(13px, 3.5vw, 14px);
+      color: #ccc;
+      margin-bottom: 15px;
+      font-style: italic;
+      line-height: 1.7;
+    }
+    
+    .testimonial-tag {
+      display: inline-block;
+      color: var(--primary-orange);
+      font-size: 12px;
+      background: rgba(255,106,0,0.1);
+      padding: 4px 8px;
+      border-radius: 50px;
+      margin: 4px 0 10px;
+    }
+    
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--primary-orange);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .testimonial-name i { font-size: 12px; }
+    
+    .testimonial-img-card, .testimonial-video-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(180deg, #222 0%, #1e1e1e 100%);
+      border-radius: 12px;
+      padding: clamp(15px, 4vw, 20px);
+      border: 1px solid rgba(51,51,51,0.8);
+      transition: var(--transition-slow);
+      margin-top: 15px;
+      transform: translateY(0);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .testimonial-img-card:hover, .testimonial-video-card:hover {
+      border-color: var(--primary-orange);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transform: translateY(-5px);
+    }
+    
+    .testimonial-img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 10px auto;
+      display: block;
+      border: 1px solid rgba(51,51,51,0.8);
+      transition: var(--transition-fast);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .testimonial-img-card:hover .testimonial-img {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    
+    .testimonial-video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      margin: 10px auto;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(51,51,51,0.8);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      aspect-ratio: 16/9;
+      height: auto !important;
+      min-height: 140px;
+    }
+    
+    .testimonial-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      allow: "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      border: none;
+    }
+    
+    .video-testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(15px, 4vw, 20px);
+      margin-top: 15px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .pain-card {
+      background: rgba(26,26,26,0.5);
+      border-radius: 8px;
+      padding: 15px;
+      border-left: 4px solid var(--primary-red);
+    }
+    
+    .pain-card h3 {
+      color: var(--primary-orange);
+      margin-bottom: 10px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .pain-card ul { list-style: none; }
+    .pain-card li {
+      padding: 6px 0;
+      color: var(--text-gray);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+    
+    .pain-card li i {
+      color: var(--primary-red);
+      font-size: 12px;
+    }
+
+    .founder-story {
+      background: linear-gradient(135deg, rgba(26,26,26,0.8) 0%, rgba(20,20,20,0.8) 100%);
+      border-radius: 12px;
+      padding: clamp(20px, 6vw, 30px);
+      margin: 20px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .founder-story::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 70% 30%, rgba(255,106,0,0.05) 0%, transparent 50%);
+      z-index: 0;
+    }
+    
+    .founder-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .founder-title {
+      font-size: clamp(20px, 6vw, 28px);
+      margin-bottom: 15px;
+      color: var(--text-white);
+    }
+    
+    .founder-text {
+      font-size: clamp(14px, 3.5vw, 16px);
+      line-height: 1.8;
+      color: var(--text-light-gray);
+      margin-bottom: 15px;
+    }
+    
+    .founder-quote {
+      font-size: clamp(16px, 4vw, 18px);
+      color: var(--primary-orange);
+      font-weight: 700;
+      margin: 15px 0;
+      padding-left: 15px;
+      border-left: 3px solid var(--primary-orange);
+    }
+
+    footer {
+      background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+      padding: clamp(30px, 8vw, 50px) 8px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(42,42,42,0.8);
+    }
+    
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-white);
+      margin-bottom: 15px;
+      background: linear-gradient(120deg, var(--primary-orange), var(--primary-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .footer-links a { 
+      color: #777; 
+      text-decoration: none; 
+      margin: 5px 8px;
+      transition: var(--transition-fast);
+      font-size: 12px;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary-orange);
+      text-decoration: underline;
+    }
+    
+    .footer-contact { 
+      color: #777; 
+      margin: 15px 0;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    
+    .footer-trust {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+    
+    .footer-trust-item {
+      color: #888;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .copyright { 
+      color: #555; 
+      margin-top: 15px;
+      font-size: 11px;
+    }
+
+    @media (min-width: 480px) and (max-width: 767px) {
+      .testimonial-video-wrapper { min-height: 180px; }
+      .pain-grid { grid-template-columns: 1fr 1fr; }
+      .fear-value-list { max-width: 90%; }
+    }
+
+    @media (min-width: 768px) {
+      body { padding-top: 80px; }
+      
+      .section-hero {
+        min-height: calc(100vh - 80px);
+        padding: 0 20px;
+      }
+      
+      .section {
+        padding: clamp(40px, 10vw, 120px) 16px;
+      }
+      
+      .container, .container-left {
+        max-width: 1200px;
+        padding: 0 20px;
+      }
+      
+      .hero-content {
+        padding-top: 50px;
+        max-width: 800px;
+        margin: 0 auto 0 0;
+      }
+      
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .pain-grid { grid-template-columns: repeat(3, 1fr); }
+      
+      .grid-table .row {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .grid-table .row .left {
+        width: 40%;
+        margin-bottom: 0;
+      }
+      
+      .grid-table .row .right {
+        width: 60%;
+      }
+      
+      .video-testimonial-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+      
+      .testimonial-video-wrapper {
+        max-width: 800px;
+        min-height: 280px;
+      }
+      
+      .fear-list-section::after { width: 40%; }
+      .fear-item {
+        max-width: 900px;
+        margin: 15px auto;
+      }
+      
+      .fear-value-list {
+        max-width: 800px;
+        margin: 30px auto;
+      }
+      
+      .fear-value-item {
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+      }
+      
+      .top-countdown {
+        padding: 12px 20px;
+        flex-wrap: nowrap;
+      }
+      
+      .top-countdown .urgency-badge {
+        padding: 8px 20px;
+        font-size: 16px;
+        margin: 0 20px 0 0;
+      }
+      
+      .top-countdown .countdown-container {
+        padding: 8px 15px;
+        font-size: 18px;
+      }
+      
+      .top-countdown .countdown-number {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+      }
+      
+      .exit-box {
+        max-width: 600px;
+        width: 100%;
+        padding: 40px;
+      }
+      
+      .faq-container {
+        max-width: 800px;
+      }
+      
+      .founder-story {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 40px;
+      }
+      
+      .btn {
+        font-size: 18px;
+        padding: 16px 35px;
+        min-height: 50px;
+        min-width: 150px;
+      }
+      
+      .btn-hero {
+        font-size: 20px;
+        padding: 18px 45px;
+        min-height: 55px;
+      }
+      
+      .float-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 12px;
+        bottom: 25px;
+        right: 25px;
+      }
+      
+      .testimonial-card {
+        padding: 25px;
+      }
+      
+      .testimonial-img-card, .testimonial-video-card {
+        padding: 25px;
+        margin-top: 25px;
+      }
+      
+      footer {
+        padding: 60px 20px 30px;
+      }
+      
+      .footer-logo {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      
+      .footer-links a {
+        font-size: 14px;
+        margin: 5px 15px;
+      }
+      
+      .footer-contact {
+        font-size: 14px;
+        margin: 20px 0;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .hero-title { font-size: 56px; }
+      .heading { font-size: 42px; }
+      .fear-title { font-size: 52px; }
+      
+      .section {
+        padding: 80px 20px 120px;
+      }
+    }
+
+    @supports (-webkit-overflow-scrolling: touch) {
+      body { overflow-x: hidden; }
+      .exit-modal { -webkit-overflow-scrolling: touch; }
+      .qrcode-modal { -webkit-overflow-scrolling: touch; }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade {
+      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+
+<body>
+  <div class="top-countdown">
+    <div class="urgency-badge">
+      <i class="fas fa-hourglass-half"></i> 报名通道即将关闭
+    </div>
+    <div class="countdown-container">
+      剩余时间：
+      <div class="countdown-box" id="top-countdown">
+        <div class="countdown-item">
+          <div class="countdown-number" id="top-days">11</div>
+          <div class="countdown-label">天</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="top-hours">00</div>
+          <div class="countdown-label">时</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="top-minutes">00</div>
+          <div class="countdown-label">分</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="top-seconds">00</div>
+          <div class="countdown-label">秒</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="float-btn" ontouchstart="" onclick="window.open('http://movement-people-chat.movementpeople.asia/','_blank')">
+    申请<br>峰会
+  </div>
+
+  <div class="exit-modal" id="exitModal">
+    <div class="exit-box">
+      <div class="exit-title">先别走。</div>
+      <div class="exit-text">
+        你带着恐惧离开，它明天还会在那里。<br>
+        90分钟，免费直面它。你敢吗？
+      </div>
+      <div class="exit-offer">
+        <i class="fas fa-fire"></i> 限时福利：报名即送《恐惧突破行动手册》
+      </div>
+      <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="">
+        <i class="fas fa-arrow-right"></i> 我敢申请
+      </a>
+      <div class="close-exit" onclick="closeExit()" ontouchstart="">
+        <i class="fas fa-times"></i> 关闭
+      </div>
+    </div>
+  </div>
+
+  <!-- 已替换为微信号的弹窗 -->
+  <div class="qrcode-modal" id="qrcodeModal">
+    <div class="qrcode-box">
+      <div class="qrcode-title">添加微信报名</div>
+      <div class="qrcode-desc">备注「直面恐惧」</div>
+      
+      <!-- 你的微信号 -->
+      <div class="wechat-id">PCoach_John</div>
+      
+      <div class="qrcode-note">
+        不敢写下恐惧、不敢面对的人，别加
+      </div>
+      <div class="close-qrcode" onclick="closeQrcode()" ontouchstart="">
+        <i class="fas fa-times"></i> 关闭
+      </div>
+    </div>
+  </div>
+
+  <section class="section section-hero">
+    <div class="container-left animate-fade">
+      <div class="hero-content">
+        <h1 class="hero-title delay-1">
+          恐惧峰会。<br>
+          状态重置。<br>
+          夺回人生的控制权。
+        </h1>
+        <p class="hero-subtitle delay-2">
+          我挑战你：<br>
+          直面你一直逃避的恐惧。<br>
+          写下它。面对它。摧毁它。
+        </p>
+        <div class="guarantee-badge delay-2">
+          <i class="fas fa-shield-alt"></i> 90分钟免费体验 · 无任何套路
+        </div>
+        <div class="btn-group delay-3">
+          <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="">
+            <i class="fas fa-rocket"></i> 接受挑战
+          </a>
+          <a href="#truth" class="btn btn-outline" ontouchstart="">
+            <i class="fas fa-user"></i> 看清真相 →
+          </a>
+        </div>
+        <p class="orange-bold delay-3">
+          免费。但有一个条件：写下你的恐惧。不敢面对的，禁止入场。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="truth" class="section section-dark animate-fade delay-1 fear-list-section">
+    <div class="container">
+      <h2 class="heading red">因为恐惧，你没做什么？</h2>
+      <p class="subhead" style="font-size:clamp(16px, 4vw, 20px); margin-bottom:25px;">
+        诚实一点。这些是不是你的真实写照？
+      </p>
+
+      <div class="fear-item">
+        <h4><i class="fas fa-lock"></i> 你没敢开始</h4>
+        <p>那个想了无数次的创业计划、那个想学的技能、那个想表白的人——你把它们锁在心里，一锁就是好几年</p>
+      </div>
+
+      <div class="fear-item">
+        <h4><i class="fas fa-mute"></i> 你没敢表达</h4>
+        <p>在会议上不敢发言、在关系中不敢说不、在生活中不敢做自己——你活成了别人期待的样子，却丢了自己</p>
+      </div>
+
+      <div class="fear-item">
+        <h4><i class="fas fa-hand-holding-water"></i> 你没敢拒绝</h4>
+        <p>为了讨好别人，你硬扛着不喜欢的工作、硬陪着不喜欢的人、硬撑着不属于自己的责任——耗尽了所有能量</p>
+      </div>
+
+      <div class="fear-item">
+        <h4><i class="fas fa-undo"></i> 你没敢坚持</h4>
+        <p>遇到一点困难就退缩、遇到一点质疑就放弃、遇到一点失败就回头——你永远在重启，却从未真正前进</p>
+      </div>
+
+      <div class="fear-item">
+        <h4><i class="fas fa-eye-slash"></i> 你没敢承认</h4>
+        <p>你骗自己是没时间、没机会、没运气——但夜深人静时你清楚：你只是怕，怕失败、怕被拒绝、怕不被认可</p>
+      </div>
+
+      <p class="fear-highlight">
+        每一次逃避，都是在给恐惧喂食<br>
+        它越吃越胖，而你越来越小
+      </p>
+
+      <div class="orange-box">
+        <i class="fas fa-exclamation-triangle"></i> 恐惧不是情绪。<br>
+        恐惧是你人生的天花板。<br>
+        你不拆它，它永远压着你。
+      </div>
+    </div>
+  </section>
+
+  <section id="fear" class="fear-section animate-fade delay-1">
+    <div class="container">
+      <h2 class="fear-title">恐惧峰会：状态重置</h2>
+      <p class="subhead">免费参与 · 但有一个硬性条件</p>
+      <p class="fear-text">写下你的恐惧。不敢面对的人，禁止入场。</p>
+      
+      <div class="fear-value-list">
+        <div class="fear-value-item">
+          <div class="icon"><i class="fas fa-search"></i></div>
+          <div class="content">
+            <h3>帮你找到什么在限制你</h3>
+            <p>我们不聊鸡汤，只做深度拆解。找到你恐惧的根源，看清是什么在偷偷偷走你的人生主动权</p>
+          </div>
+        </div>
+        
+        <div class="fear-value-item">
+          <div class="icon"><i class="fas fa-bolt"></i></div>
+          <div class="content">
+            <h3>带你做一个你觉得自己做不到的事</h3>
+            <p>90分钟内，在安全的环境中，我们会推着你完成那个你一直不敢做的动作——一次突破，终身改变</p>
+          </div>
+        </div>
+        
+        <div class="fear-value-item">
+          <div class="icon"><i class="fas fa-hammer"></i></div>
+          <div class="content">
+            <h3>现场拆掉你的恐惧</h3>
+            <p>不是缓解，不是逃避，是彻底拆掉。用实战方法，让你亲眼看见：恐惧不过是纸老虎</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="fear-tag">
+        <i class="fas fa-clock"></i> 90分钟 · 线上强袭
+      </div>
+      
+      <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="" style="font-size:clamp(18px, 5vw, 22px); padding:18px 45px;">
+        <i class="fas fa-paper-plane"></i> 立即锁定报名资格
+      </a>
+      
+      <p class="fear-note">
+        申请后，你会收到一条私信。写下你的恐惧，回复给我。<br>
+        直面恐惧的人，才能进入峰会。
+      </p>
+      <p class="handwriting">
+        “你最后一次真正面对恐惧，是什么时候？”
+      </p>
+    </div>
+  </section>
+
+  <section id="about" class="section animate-fade delay-1">
+    <div class="container">
+      <h2 class="heading">我带你走出来。</h2>
+      
+      <div class="founder-story">
+        <div class="founder-content">
+          <p class="founder-text">
+            你可能会问，凭什么你能带我拆恐惧？<br><br>
+            我17岁重伤站不起来，那一年我被恐惧彻底吞噬。<br><br>
+           我怕疼、怕失败、怕别人眼光、怕再也站不起来。<br><br>
+            我躺在那里，连哭都不敢大声。<br><br>
+            后来我做了一个决定：<br>
+            我必须直面恐惧，否则我永远是它的奴隶。
+          </p>
+          
+          <p class="founder-quote">
+            恐惧不是用来躲的。是用来拆的。
+          </p>
+          
+          <p class="founder-text">
+            我花了数年时间，把自己从恐惧里拉出来。<br>
+            现在，我想带你走我走过的这条路，陪你一起突破恐惧的牢笼。<br><br>
+            90分钟。免费。<br>
+            你只需要敢面对。
+          </p>
+          
+          <p class="orange-bold" style="font-size:20px;">
+            这条路我走过。你要不要跟我走？
+          </p>
+          
+          <div class="btn-group">
+            <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="">
+              <i class="fas fa-road"></i> 接受挑战 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section animate-fade delay-1">
+    <div class="container">
+      <h2 class="testimonial-main-title">见证 —— 有人走过了</h2>
+      <p class="testimonial-subtitle">这些人也曾和你一样被恐惧困住，直到他们做出了选择</p>
+      
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">“</p>
+          <p class="testimonial-text">
+            从一个想法到行动并没有想象中的远，<br>
+            通过BRP，我解锁了从未想过的成果，<br>
+            在正确的方向上变得更加自信。
+          </p>
+          <span class="testimonial-tag">BRP突破 · 行动成果</span>
+          <p class="testimonial-name">
+            <i class="fas fa-user"></i> 阿茂
+          </p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">“</p>
+          <p class="testimonial-text">
+            在遇见 John 之前，我的身心状态被工作榨干了，<br>
+            John 总能引导我，让我在BRP的过程里重新认识自己的潜力，<br>
+            发现了我原来是可塑的，开始慢慢享受改变后的成就感。
+          </p>
+          <span class="testimonial-tag">身心修复 · 潜力觉醒</span>
+          <p class="testimonial-name">
+            <i class="fas fa-user"></i> yy
+          </p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">“</p>
+          <p class="testimonial-text">
+            我以为我是懒、是忙、是没机会。原来我只是怕。峰会把我打醒了。
+          </p>
+          <span class="testimonial-tag">认清真相 · 重新开始</span>
+          <p class="testimonial-name">
+            <i class="fas fa-user"></i> 文博
+          </p>
+        </div>
+      </div>
+
+      <div class="video-testimonial-grid">
+        <div class="testimonial-video-card">
+          <p class="testimonial-quote">“</p>
+          <p class="testimonial-text" style="font-size:clamp(14px, 3.5vw, 16px);">
+            50天，从扛不住到身体重置。
+          </p>
+          <div class="testimonial-video-wrapper">
+            <iframe src="https://player.xinpianchang.com/?aid=13666418&amp;mid=qd9g4rDDbjG7v86Z" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+          </div>
+          <span class="testimonial-tag">身体重置 · 重拾力量</span>
+          <p class="testimonial-name">
+            <i class="fas fa-user"></i> ee
+          </p>
+        </div>
+
+        <div class="testimonial-video-card">
+          <p class="testimonial-quote">“</p>
+          <p class="testimonial-text" style="font-size:clamp(14px, 3.5vw, 16px);">
+            14天，我从依赖别人，到自己站起来了。
+          </p>
+          <div class="testimonial-video-wrapper">
+            <iframe src="https://player.xinpianchang.com/?aid=13666417&amp;mid=bKG8QdMMZb57RJMy" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+          </div>
+          <span class="testimonial-tag">独立成长 · 自我突破</span>
+          <p class="testimonial-name">
+            <i class="fas fa-user"></i> 阿乐
+          </p>
+        </div>
+      </div>
+
+      <div class="testimonial-img-card">
+        <p class="testimonial-quote">“</p>
+        <p class="testimonial-text" style="font-size:clamp(14px, 3.5vw, 16px);">
+          在这里，他找回了掌控力，也干掉了内耗
+        </p>
+        <a href="https://imgchr.com/i/peqyVN6"><img src="https://s41.ax1x.com/2026/05/08/peqyVN6.jpg" alt="peqyVN6.jpg" border="0" class="testimonial-img"></a>
+        <span class="testimonial-tag">告别内耗 · 重建自信</span>
+        <p class="testimonial-name">
+          <i class="fas fa-user"></i> Jaden
+        </p>
+      </div>
+      
+      <div class="btn-group" style="margin-top:40px;">
+        <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="">
+          <i class="fas fa-arrow-right"></i> 走他们走过的路，突破恐惧
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark animate-fade delay-1">
+    <div class="container">
+      <h2 class="heading red">如果你继续逃避——</h2>
+      
+      <div class="pain-grid">
+        <div class="pain-card">
+          <h3><i class="fas fa-calendar-times"></i> 三个月后</h3>
+          <ul>
+            <li><i class="fas fa-times"></i> 你还是不敢开始</li>
+            <li><i class="fas fa-times"></i> 你还是原地打转</li>
+            <li><i class="fas fa-times"></i> 恐惧依然控制你</li>
+          </ul>
+        </div>
+        
+        <div class="pain-card">
+          <h3><i class="fas fa-calendar-times"></i> 六个月后</h3>
+          <ul>
+            <li><i class="fas fa-times"></i> 你还是不敢表达</li>
+            <li><i class="fas fa-times"></i> 你还是自我内耗</li>
+            <li><i class="fas fa-times"></i> 越来越没有底气</li>
+          </ul>
+        </div>
+        
+        <div class="pain-card">
+          <h3><i class="fas fa-calendar-times"></i> 一年后</h3>
+          <ul>
+            <li><i class="fas fa-times"></i> 你还是卡在原地</li>
+            <li><i class="fas fa-times"></i> 你还是怕面对恐惧</li>
+            <li><i class="fas fa-times"></i> 又浪费了一年人生</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h2 class="orange-bold" style="margin-top:30px; font-size:clamp(16px, 4vw, 20px);">
+        不面对，恐惧永远在。<br>
+        面对，90分钟后你彻底重置。<br>
+        你，选哪条路？
+      </h2>
+    </div>
+  </section>
+
+  <section class="section animate-fade delay-1">
+    <div class="container">
+      <h2 class="heading">你还在犹豫什么？</h2>
+      <div class="faq-container">
+        <div class="faq-item" ontouchstart="">
+          <div class="faq-question">Q1：我真的没时间，怎么办？</div>
+          <div class="faq-answer">
+            恐惧峰会仅90分钟。你不是没时间，你是不敢面对。
+            90分钟，换你人生后半程的自由，不值得吗？
+          </div>
+        </div>
+
+        <div class="faq-item" ontouchstart="">
+          <div class="faq-question">Q2：我怕面对恐惧，会很难受？</div>
+          <div class="faq-answer">
+            难受是暂时的，解脱是永久的。
+            压抑比面对更痛苦。峰会会安全地带你穿越恐惧。
+          </div>
+        </div>
+
+        <div class="faq-item" ontouchstart="">
+          <div class="faq-question">Q3：这个真的有用吗？</div>
+          <div class="faq-answer">
+            有用。不是我说的，是每一个参加过的人说的。
+            90分钟，你会亲眼看见自己的变化。
+          </div>
+        </div>
+        
+        <div class="faq-item" ontouchstart="">
+          <div class="faq-question">Q4：我基础很差，能跟上吗？</div>
+          <div class="faq-answer">
+            峰会没有门槛。不管你现在状态多差，都能参加。
+            你只需要带着勇气来，剩下的交给我们。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark animate-fade delay-1">
+    <div class="container">
+      <h2 class="heading">你还在等什么？</h2>
+      <p class="subhead">恐惧不会自己消失，除非你直面它。</p>
+      
+      <div class="btn-group">
+        <a href="http://movement-people-chat.movementpeople.asia/" target="_blank" class="btn btn-hero" ontouchstart="">
+          <i class="fas fa-bullseye"></i> 立即锁定报名资格
+        </a>
+      </div>
+      
+      <p class="orange-bold" style="font-size:clamp(16px, 4vw, 20px); margin-top:20px;">
+        Join The Movers.<br>
+        MOVE. OR BE MOVED.
+      </p>
+    </div>
+  </section>
+
+  <footer class="animate-fade delay-1">
+    <div class="container">
+      <div class="footer-logo">MOVEMENT PEOPLE</div>
+      
+      <div class="footer-links">
+        <a href="#" ontouchstart="">首页</a>
+        <a href="#fear" ontouchstart="">恐惧峰会</a>
+        <a href="#about" ontouchstart="">关于我</a>
+        <a href="#" ontouchstart="">常见问题</a>
+      </div>
+      
+      <div class="footer-contact">
+        <i class="fab fa-instagram"></i> IG：@movementpeople | 
+        <i class="fas fa-envelope"></i> 邮箱：hello@movementpeople.asia
+      </div>
+      
+      <div class="copyright">
+        © 2026 Movement People. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 🔥 永久固定倒计时：2026年5月16日 23:59:59 绝对无法重置
+    function startCountdown() {
+      const endDate = new Date(2026, 4, 16, 23, 59, 59);
+
+      function updateCountdown() {
+        const currentTime = new Date();
+        const diff = endDate - currentTime;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const formatNumber = (num) => num.toString().padStart(2, '0');
+
+        if (document.getElementById('top-days')) {
+          document.getElementById('top-days').textContent = Math.max(0, days);
+          document.getElementById('top-hours').textContent = formatNumber(Math.max(0, hours));
+          document.getElementById('top-minutes').textContent = formatNumber(Math.max(0, minutes));
+          document.getElementById('top-seconds').textContent = formatNumber(Math.max(0, seconds));
+        }
+
+        if (diff <= 0) {
+          clearInterval(timer);
+          document.querySelectorAll('.countdown-number').forEach(el => {
+            el.textContent = '00';
+          });
+          document.querySelector('.top-countdown .urgency-badge').textContent = '报名通道已关闭';
+          document.querySelector('.top-countdown .urgency-badge').style.background = '#666';
+        }
+      }
+
+      updateCountdown();
+      const timer = setInterval(updateCountdown, 1000);
+      return timer;
+    }
+
+    let countdownTimer;
+    document.addEventListener('DOMContentLoaded', function() {
+      countdownTimer = startCountdown();
+      
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 20) {
+          document.getElementById('exitModal').classList.add('show');
+        }
+      });
+      
+      let touchStartY = 0;
+      document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      });
+      
+      document.addEventListener('touchmove', function(e) {
+        const touchY = e.touches[0].clientY;
+        if (touchY - touchStartY > 50 && touchStartY < 30) {
+          document.getElementById('exitModal').classList.add('show');
+        }
+      });
+
+      window.closeExit = function() {
+        document.getElementById('exitModal').classList.remove('show');
+      }
+
+      window.showQrcode = function() {
+        window.open('http://movement-people-chat.movementpeople.asia/','_blank');
+      }
+
+      window.closeQrcode = function() {
+        document.getElementById('qrcodeModal').classList.remove('show');
+      }
+
+      document.getElementById('qrcodeModal').addEventListener('touchmove', function(e) {
+        e.preventDefault();
+      }, { passive: false });
+
+      document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+          toggleFaq(item);
+        });
+        
+        item.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          toggleFaq(item);
+        });
+      });
+      
+      function toggleFaq(item) {
+        const answer = item.nextElementSibling;
+        item.classList.toggle('active');
+        if (answer.style.maxHeight) {
+          answer.style.maxHeight = null;
+        } else {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      }
+      
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const offsetTop = window.innerWidth >= 768 ? 80 : 70;
+            window.scrollTo({
+              top: targetElement.offsetTop - offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      document.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+      }, { passive: false });
+      
+      document.getElementById('exitModal').addEventListener('touchmove', function(e) {
+        e.preventDefault();
+      }, { passive: false });
+      
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-fade');
+        elements.forEach(el => {
+          const elementTop = el.getBoundingClientRect().top;
+          const elementVisible = window.innerWidth >= 768 ? 150 : 100;
+          if (elementTop < window.innerHeight - elementVisible) {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll();
+    });
+
+    window.addEventListener('beforeunload', function() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+      }
+    });
+  </script>
+</body>
+</html>
